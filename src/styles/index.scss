@@ -1,0 +1,34 @@
+@import 'reset';
+@import 'variables';
+@import 'mixins';
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: white;
+  padding: $vertical-padding / 2;
+  margin: 0 auto;
+  font-family: $sans-font;
+  font-size: 20px;
+  line-height: 1.4;
+  @include MQ(S) {
+    font-size: 18px;
+  }
+}
+
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis--x path {
+  /*display: none; */
+}
