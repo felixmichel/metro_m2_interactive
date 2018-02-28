@@ -1,5 +1,5 @@
-# Portfolio
-Single page application to display my recent work, built with RiotJS. The app features a simple grid view using flexbox.
+# Metro M2
+M2 story
 
 # Installation
 
