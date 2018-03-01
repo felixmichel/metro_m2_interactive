@@ -1,3 +1,13 @@
-station,revenue
-Castellane,5000
-Notre-Dame-Du-Mont,10000
+station,latitude,longitude,iris,revenue
+Ste Marguerite Dromel,43.270903,5.402898,Metro Dromel,18125.0
+Rond-Point du Prado,43.271510,5.392344,Parc Chanot,24728.0
+Perier,43.279736,5.387442,Turcat Mery,23302.0
+Castellane,43.286297,5.383730,Castellane-Italie,17350.0
+Notre Dame du Mont,43.292685,5.383816,Julien,15228.0
+Noailles,43.297308,5.381176,Gymnase,13908.0
+Saint Charles,43.302664,5.380383,Saint-Charles-Guibal,17528.0
+Jules Guesde,43.301977,5.373688,Montolieu,4746.0
+Joliette,43.304600,5.367143,Mazenod-Republique,11534.0
+Desirée Clary,43.309192,5.372471,Potier,6682.0
+National,43.315125,5.373026,Briancon,6344.0
+Bougainville,43.320614,5.371431,Zoccolat,5484.0

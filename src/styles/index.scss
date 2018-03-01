@@ -22,13 +22,28 @@ body {
 
 
 .bar {
-  fill: steelblue;
-}
-
-.bar:hover {
-  fill: brown;
+  fill: #FF3814;
 }
 
 .axis--x path {
-  /*display: none; */
+  display: none;
 }
+
+.axis--y path {
+  stroke: #C9B49D;
+}
+
+.axis--y text {
+  fill: #735C45;
+}
+
+.axis--x text {
+  fill: #735C45;
+}
+
+
+
+.axis--y line {
+  stroke: #C9B49D;
+}
+

@@ -1,8 +1,9 @@
 <metro-app>
-    <p>I am a tag and I work</p>
-    <metro-barchart></metro-barchart>
+    <metro-barchart series="age"></metro-barchart>
 
-    <script type="text/babel">
+    <metro-barchart series="revenue"></metro-barchart>
+
+    <script type="text/javascript">
 
     </script>
 </metro-app>
