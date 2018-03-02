@@ -15,15 +15,23 @@
     console.log(opts);
 
     this.on("updated", () => {
+    	drawChart();
 
-    // TODO: put all code for drawing the chart in a function in order to call on resize event
+    });
 
-    // basic mobile behaviour
+    // Redraw based on the new size whenever the browser window is resized.
+    //window.onresize = function() { drawChart(); };
 
+    function drawChart () {
+    
     var series = opts.series;
 
-    var svg_width = Math.max(0, window.innerWidth - 20);
-	var svg = select("#" + opts.series).attr("width", svg_width);
+    var svg_width = Math.max(0, window.innerWidth);
+	var svg = select("#" + opts.series)
+
+	svg.selectAll('*').remove()
+
+	svg.attr("width", svg_width);
 
 	var margin = {top: 20, right: 35, bottom: 200, left: 50},
 	width = +svg.attr("width") - margin.left - margin.right,
@@ -136,7 +144,8 @@
     		.duration(1500)
     		.attr("transform", "translate(" + width + ", 3.5)")
     	});
-});
+
+    }
 
 
   	

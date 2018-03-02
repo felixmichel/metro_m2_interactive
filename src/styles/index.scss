@@ -9,8 +9,8 @@
 }
 
 body {
-  background-color: white;
-  padding: $vertical-padding / 2;
+  background-color: $background-color;
+  /*padding: $vertical-padding / 2; */
   margin: 0 auto;
   font-family: $sans-font;
   font-size: 20px;
@@ -20,9 +20,8 @@ body {
   }
 }
 
-
 .bar {
-  fill: #FF3814;
+  fill: $primary-color;
 }
 
 .axis--x path {
@@ -30,20 +29,18 @@ body {
 }
 
 .axis--y path {
-  stroke: #C9B49D;
+  stroke: $light-brown;
+}
+
+.axis--y line {
+  stroke: $light-brown;
 }
 
 .axis--y text {
-  fill: #735C45;
+  fill: $dark-brown;
 }
 
 .axis--x text {
-  fill: #735C45;
-}
-
-
-
-.axis--y line {
-  stroke: #C9B49D;
+  fill: $dark-brown;
 }
 
