@@ -12,25 +12,19 @@
     var primary_color = "#FF3814";
     var background_color = "#EDE6DE";
 
-    console.log(opts);
-
     this.on("updated", () => {
     	drawChart();
-
     });
 
-    // Redraw based on the new size whenever the browser window is resized.
-    //window.onresize = function() { drawChart(); };
-
     function drawChart () {
+
+    // TODO: make it correctly using enter, append, merge and selections
     
     var series = opts.series;
 
-    var svg_width = Math.max(0, window.innerWidth);
-	var svg = select("#" + opts.series)
-
-	svg.selectAll('*').remove()
-
+    var svg_width = Math.max(0, window.innerWidth),
+	svg = select("#" + opts.series);
+	svg.selectAll("*").remove();
 	svg.attr("width", svg_width);
 
 	var margin = {top: 20, right: 35, bottom: 200, left: 50},
@@ -45,7 +39,7 @@
 	var g = svg.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	csv("/data/content.csv", function(d) {
+	csv("/data/m2_stat.csv", function(d) {
 		d[series] = +d[series];
 		return d; })
 	.then(function(data) {
@@ -146,12 +140,6 @@
     	});
 
     }
-
-
-  	
-
-  	
-
 </script>
 
 </metro-barchart>
