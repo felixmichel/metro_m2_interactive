@@ -3,26 +3,26 @@
 
 <script type="text/javascript">
 	import { csv } from "d3-fetch";
-    import { select, selectAll } from "d3-selection";
-    import { scaleBand, scaleLinear } from "d3-scale";
-    import { min, max } from "d3-array";
-    import { axisBottom, axisLeft } from "d3-axis";
-    import { transition } from "d3-transition";
+  import { select, selectAll } from "d3-selection";
+  import { scaleBand, scaleLinear } from "d3-scale";
+  import { min, max } from "d3-array";
+  import { axisBottom, axisLeft } from "d3-axis";
+  import { transition } from "d3-transition";
 
-    var primary_color = "#FF3814";
-    var background_color = "#EDE6DE";
+  var primary_color = "#FF3814";
+  var background_color = "#EDE6DE";
 
-    this.on("updated", () => {
-    	drawChart();
-    });
+  this.on("updated", () => {
+  	drawChart();
+  });
 
-    function drawChart () {
+  function drawChart () {
 
-    // TODO: make it correctly using enter, append, merge and selections
-    
-    var series = opts.series;
+  // TODO: make it correctly using enter, append, merge and selections
+  
+  var series = opts.series;
 
-    var svg_width = Math.max(0, window.innerWidth),
+  var svg_width = Math.max(0, window.innerWidth),
 	svg = select("#" + opts.series);
 	svg.selectAll("*").remove();
 	svg.attr("width", svg_width);
@@ -57,15 +57,15 @@
             .attr("stroke-width", 3)
 			.attr("stroke", primary_color);
 
-		x_axis
+		  x_axis
       		.attr("transform", "translate(0," + height + ")")
       		.call(axisBottom(x).tickPadding(20));
 
-      	g.append("g")
+      g.append("g")
     		.attr("class", "axis axis--y")
     		.call(axisLeft(y).ticks(5))
 
-  		g.selectAll(".bar")
+      g.selectAll(".bar")
     		.data(data)
     		.enter().append("rect")
       		.attr("class", "bar")
@@ -77,8 +77,8 @@
       		.attr("y", function(d) { return y(d[series]); })
       		.attr("height", function(d) { return height - y(d[series]); });
 
-      	var ticks = x_axis.selectAll(".tick");
-      	ticks.each(function() { select(this)
+      var ticks = x_axis.selectAll(".tick");
+      ticks.each(function() { select(this)
       		.append("circle")
       		.attr("r", 5)
       		.attr("cy", 15)
@@ -86,16 +86,16 @@
       		.attr("stroke", background_color)
       		.attr("stroke-width", 1); })
 
-      	ticks.selectAll("line").remove();
+      ticks.selectAll("line").remove();
 
-      	ticks.each(function() { select(this)
+      ticks.each(function() { select(this)
       		.append("circle")
       		.attr("r", 3.5)
       		.attr("cy", 15)
       		.attr("fill", background_color) })
 
-      	x_axis.selectAll("text")
-      		.attr("y", 0)
+      x_axis.selectAll("text")
+      	.attr("y", 0)
     		.attr("x", 25)
     		.attr("dy", ".35em")
     		.attr("transform", "rotate(90)")

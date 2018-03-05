@@ -10,6 +10,7 @@
 
 body {
   background-color: $background-color;
+  color: $font-brown;
   /*padding: $vertical-padding / 2; */
   margin: 0 auto;
   font-family: $sans-font;
@@ -44,3 +45,10 @@ body {
   fill: $dark-brown;
 }
 
+.stations-text {
+  fill: $font-brown;
+  @include MQ(S) {
+    font-size: 14px;
+  }
+
+}
