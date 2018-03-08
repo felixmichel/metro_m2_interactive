@@ -1,5 +1,7 @@
 <metro-barchart>
-	<svg id="{ opts.series }" height="500"></svg>
+  <div id="wrapper">
+    <svg id="{ opts.series }" height="500"></svg>
+  </div>
 
 <script type="text/javascript">
 	import { csv } from "d3-fetch";
@@ -22,8 +24,10 @@
   
   var series = opts.series;
 
-  var svg_width = Math.max(0, window.innerWidth),
-	svg = select("#" + opts.series);
+  //var svg_width = Math.max(0, window.innerWidth),
+	var svg = select("#" + opts.series),
+  svg_width = select("#wrapper").node().getBoundingClientRect().width;
+
 	svg.selectAll("*").remove();
 	svg.attr("width", svg_width);
 
@@ -95,6 +99,7 @@
       		.attr("fill", background_color) })
 
       x_axis.selectAll("text")
+        .attr("class", "barchart-label")
       	.attr("y", 0)
     		.attr("x", 25)
     		.attr("dy", ".35em")

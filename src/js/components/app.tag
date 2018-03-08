@@ -1,9 +1,28 @@
 <metro-app>
+    <div class="intro">
+        <h1>Les inégalités de Marseille</h1>
+        <h2>Les différences arrêt par arrêt</h2>
+        <p class="author">Une enquête de <span>Nicolas Bocquet et Félix Michel</span></p>
+    </div>
     <div class="container">
         <svg id="map_background"></svg>
+
+        <div class="content">
+            <p class="lead">
+                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </p>
+            
+        </div>
+
+
+        
+
+
+
+
     </div>
 
-    <div class="intro">Intro-Text</div>
+
 
     <metro-barchart series="age"></metro-barchart>
 
@@ -15,6 +34,8 @@
         import { easeLinear } from "d3-ease"
 
         // TODO: make it correctly using enter, append, merge and selections
+
+        // TODO: add max container to svg element in order to optimize for all screen sizes
 
         var primary_color = "#FF3814";
         var background_color = "#EDE6DE";
@@ -45,7 +66,7 @@
             var marseille_shape = svg.append("g")
                 .attr("transform", function () { if (window.innerWidth > breakpoint_l) { 
                     return "translate(-400, -400)scale(2)" } else if (window.innerWidth > breakpoint_m) {
-                    return "translate(-300, -250)" } else if (window.innerWidth < breakpoint_m) {
+                    return "translate(-300, -300)" } else if (window.innerWidth < breakpoint_m) {
                     return "translate(-625, -200)scale(0.75)"
                     }
                 })
@@ -58,7 +79,7 @@
             var frioul_shape_1 = svg.append("g")
                 .attr("transform", function () { if (window.innerWidth > breakpoint_l) { 
                     return "translate(-400, -400)scale(2)" } else if (window.innerWidth > breakpoint_m) {
-                    return "translate(-300, -250)" } else if (window.innerWidth < breakpoint_m) {
+                    return "translate(-300, -300)" } else if (window.innerWidth < breakpoint_m) {
                     return "translate(-625, -200)scale(0.75)"
                     }
                 })
@@ -72,7 +93,7 @@
             var frioul_shape_2 = svg.append("g")
                 .attr("transform", function () { if (window.innerWidth > breakpoint_l) { 
                     return "translate(-400, -400)scale(2)" } else if (window.innerWidth > breakpoint_m) {
-                    return "translate(-300, -250)" } else if (window.innerWidth < breakpoint_m) {
+                    return "translate(-300, -300)" } else if (window.innerWidth < breakpoint_m) {
                     return "translate(-625, -200)scale(0.75)"
                     }
                 })
@@ -86,7 +107,7 @@
             var subway_line = svg.append("g")
                .attr("transform", function () { if (window.innerWidth > breakpoint_l) { 
                     return "translate(-400, -400)scale(2)" } else if (window.innerWidth > breakpoint_m) {
-                    return "translate(-300, -250)" } else if (window.innerWidth < breakpoint_m) {
+                    return "translate(-300, -300)" } else if (window.innerWidth < breakpoint_m) {
                     return "translate(-625, -200)scale(0.75)"
                     }
                 })
@@ -113,7 +134,7 @@
             var stations = svg.append("g")
             .attr("transform", function () { if (window.innerWidth > breakpoint_l) { 
                     return "translate(1440, 275)" } else if (window.innerWidth > breakpoint_m) {
-                    return "translate(620, 90)" } else if (window.innerWidth < breakpoint_m) {
+                    return "translate(620, 40)" } else if (window.innerWidth < breakpoint_m) {
                     return "translate(65, 50)"
                     }
                 })
@@ -212,7 +233,7 @@
             .attr("transform", "translate(0,-5)rotate(-25)")
             .transition()
             .delay(500)
-            .attr("transform", "translate(5,-10)rotate(-25)")
+            .attr("transform", "translate(6,-10)rotate(-25)")
 
         metroTransition();
 

@@ -13,13 +13,60 @@ body {
   color: $font-brown;
   /*padding: $vertical-padding / 2; */
   margin: 0 auto;
-  font-family: $sans-font;
+  font-family: $text-font;
   font-size: 20px;
   line-height: 1.4;
   @include MQ(S) {
     font-size: 18px;
   }
 }
+
+.intro {
+  color: $font-brown;
+  visibility: hidden;
+  position: absolute;
+  top: 15vh;
+  left: 5vw;
+  width: 40vw;               
+  animation: showIntro 1.5s ease-in 6s forwards;
+  & h1 {
+    font-family: $big-font;
+    text-transform: uppercase;
+    font-size: 56px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 56px;
+  }
+  & h2 {
+    font-family: $byline-font;
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  & .author {
+    font-family: $text-font;
+    font-size: 16px;
+    font-weight: 400;
+    & span {
+      font-weight: 700;
+    }
+  }
+}
+
+/*.content {
+  width: ;
+}*/
+
+#wrapper {
+  width: 50%;
+}
+
+@keyframes showIntro {
+    0% {opacity: 0; visibility: hidden;}
+    
+    100% {opacity:100%; visibility: visible;}
+}
+
 
 .bar {
   fill: $primary-color;
@@ -38,15 +85,19 @@ body {
 }
 
 .axis--y text {
+  font-family: $text-font;
   fill: $dark-brown;
 }
 
 .axis--x text {
+  font-size: 14px;
+  font-family: $text-font;
   fill: $dark-brown;
 }
 
 .stations-text {
   fill: $font-brown;
+  font-size: 16px;
   @include MQ(S) {
     font-size: 14px;
   }
