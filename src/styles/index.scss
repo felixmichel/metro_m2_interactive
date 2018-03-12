@@ -9,56 +9,161 @@
 }
 
 body {
-  background-color: $background-color;
+  background-color: white;
   color: $font-brown;
   /*padding: $vertical-padding / 2; */
   margin: 0 auto;
   font-family: $text-font;
   font-size: 20px;
-  line-height: 1.4;
+  line-height: 1.5;
   @include MQ(S) {
     font-size: 18px;
   }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: $XL;
+  background-color: $background-color;
+}
+
+#background_wrapper {
+  min-height: 100%;
+}
+
+header {
+  padding-bottom: $vertical-padding;
+}
+
+.scroll-indicator {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 5;
+    &-inner {
+      height: 0;
+      width: 0;
+      border-bottom: 40px solid $font-brown;
+      border-left: 40px solid transparent;
+      border-right: 40px solid transparent;
+    }
 }
 
 .intro {
   color: $font-brown;
   visibility: hidden;
   position: absolute;
-  top: 15vh;
-  left: 5vw;
+  margin-top: 15vh;
+  margin-left: 5vw;
   width: 40vw;               
   animation: showIntro 1.5s ease-in 6s forwards;
+  @include MQ(S) {
+    text-align: center;
+    margin-left: 0;
+    margin-top: 75vh;
+    width: 100%;
+    padding: $vertical-padding;
+  }
+  @include MQ(XS) {
+    margin-top: 480px;
+
+  }
   & h1 {
     font-family: $big-font;
     text-transform: uppercase;
-    font-size: 56px;
+    font-size: 76px;
     font-weight: 700;
     margin-bottom: 10px;
-    line-height: 56px;
+    line-height: 1;
+    @include MQ(S) {
+    font-size: 38px;
+  }
   }
   & h2 {
     font-family: $byline-font;
-    font-size: 32px;
+    font-size: 36px;
+    line-height: 1.2;
     margin-bottom: 10px;
     font-weight: 500;
+    @include MQ(S) {
+    font-size: 24px;
+  }
   }
   & .author {
     font-family: $text-font;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
     & span {
       font-weight: 700;
     }
+    @include MQ(S) {
+    display: none;
+  }
   }
 }
 
-/*.content {
-  width: ;
-}*/
+.content {
+  padding: $vertical-padding;
+  max-width: $M;
+  margin: 0 auto;
+}
 
-#wrapper {
-  width: 50%;
+.byline {
+  padding-top: $vertical-padding;
+  padding-bottom: 2 * $vertical-padding;
+  /*text-transform: uppercase;*/
+  color: $primary-color;
+  font-weight: 700;
+}
+
+h3 {
+  padding-top: $vertical-padding;
+  font-family: $title-font;
+  font-size: 30px;
+  font-weight: 400;
+  @include MQ(S) {
+    margin-top: $vertical-padding;
+    font-size: 20px;
+  }
+}
+
+hr {
+  display: block;
+  border: 0;
+  border-top: 1px solid $background-color;
+  margin: 1em 0;
+  padding: 0;
+  background: $primary-color;
+  height: 4px;
+  width: 150px;
+  border-radius: 1px;
+}
+
+h4 {
+  font-size: 36px;
+  font-family: $title-font;
+  margin-bottom: $vertical-padding;
+  font-weight: 500;
+}
+
+p {
+  margin-bottom: $vertical-padding;
+  clear: both;
+}
+
+.chart-container {
+  margin-left: -15%;
+  width: 130%;
+  float: left;
+  @include MQ(M) {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.wrapper {
+  float: left;
 }
 
 @keyframes showIntro {
@@ -67,9 +172,20 @@ body {
     100% {opacity:100%; visibility: visible;}
 }
 
-
-.bar {
-  fill: $primary-color;
+.small-chart {
+  width: 33%;
+  @include MQ(M) {
+    width: 100%;
+  }
+}
+.medium-chart {
+  width: 50%;
+  @include MQ(M) {
+    width: 100%;
+  }
+}
+.large-chart {
+  width: 100%;
 }
 
 .axis--x path {
@@ -84,15 +200,39 @@ body {
   stroke: $light-brown;
 }
 
-.axis--y text {
+.axis--y .tick text {
   font-family: $text-font;
   fill: $dark-brown;
+  font-size: 10px;
+  alignment-baseline: text-after-edge;
+  /*@include MQ(S) {
+    font-size: 12px;
+  }*/
 }
 
 .axis--x text {
-  font-size: 14px;
+  font-size: 13px;
   font-family: $text-font;
   fill: $dark-brown;
+  @include MQ(S) {
+    font-size: 12px;
+  }
+}
+
+.bar-value {
+  font-size: 13px;
+  font-family: $text-font;
+  fill: $background-color;
+  @include MQ(S) {
+    font-size: 10px;
+    fill: $dark-brown;
+
+  }
+}
+
+.chart-title text {
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .stations-text {

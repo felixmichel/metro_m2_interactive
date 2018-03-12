@@ -8,17 +8,24 @@ import { mount } from 'riot'
 import '../styles/index.scss'
 import './components/app.tag'
 import './components/barchart.tag'
-import { csv } from 'd3-fetch'
+import { csv, json } from 'd3-fetch'
 
-csv('/data/stations.csv', function (d) {
-  d.position_x = +d.position_x
-  d.position_y = +d.position_y
-  d.animation_time = +d.animation_time
-  d.text_x = +d.text_x
-  d.text_y = +d.text_y
-  return d
-}).then(function (data) {
+Promise.all([
+  csv('/data/stations.csv', (stations) => {
+    stations.position_x = +stations.position_x
+    stations.position_y = +stations.position_y
+    stations.animation_time = +stations.animation_time
+    stations.text_x = +stations.text_x
+    stations.text_y = +stations.text_y
+    return stations
+  }),
+  json('/data/svg_data.json'),
+  json('/data/content.json')
+])
+.then(([stations, svg, content]) => {
   mount('metro-app', {
-    stations: data
+    stations: stations,
+    svg_data: svg,
+    content: content
   })
 })
