@@ -15,7 +15,7 @@
 
 	<iframe width="100%" height="236" src="https://www.youtube.com/embed/Y9ni0CghN4s" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-	<script type="text/javascript">
+	<script type="text/babel">
 
 	this.on("updated", () => {
 		console.log(opts)
