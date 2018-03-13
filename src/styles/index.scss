@@ -259,20 +259,20 @@ p {
 .sidebar {
   visibility: hidden;
   opacity: 0;
-  overflow-x: hidden;
   z-index: 1;
   background-color: #A0BEC9;
   color: $font-brown;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 450px;
+  margin-top: 0;
+  margin-left: 0;
+  width: 500px;
   transition: 0.5s;
   padding: $vertical-padding * 2;
+  padding-bottom: 0;
   & h1 {
     /*font-weight: 700;*/
-    text-transform: uppercase;
-    font-family: $big-font;
+    /*text-transform: uppercase;*/
+    font-family: $title-font;
     font-size: 30px;
   }
   @include MQ(S) {
@@ -281,6 +281,23 @@ p {
     padding: $vertical-padding;
   }
 
+}
+
+.poster {
+  margin-bottom: $vertical-padding;
+  &-container {
+    padding: $vertical-padding 0;
+  }
+  &-icon {
+    clear: both;
+    float: left;
+    padding-right: $vertical-padding / 2;
+  }
+  &-label {
+    font-family: $title-font;
+    font-size: 24px;
+    padding-top: 8px;
+  }
 }
 
 /*#A0BEC9*/

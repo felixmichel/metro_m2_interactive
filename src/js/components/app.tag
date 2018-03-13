@@ -68,7 +68,7 @@
         import { transition } from "d3-transition";
         import { easeLinear } from "d3-ease";
 
-        // TODO: Ziate, Videos einbetten, Sidebar
+        // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Hover- / Click-State-Subway-Line, Real-Data for Sidebar, Click-Indicator for Sidebar, Scroll-Indicator for Analysis, Close-Button Mobile
 
         // Bugs: Animationen nur einmal ausführen, bei Resize keine Animation mehr machen
 
