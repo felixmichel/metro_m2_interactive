@@ -1,5 +1,6 @@
 <metro-app>
     <header class="container" id="background_wrapper">
+        <metro-sidebar class="sidebar" data="{ sidebar_data }"></metro-sidebar>
         <div class="intro">
             <h1>Les inégalités de Marseille</h1>
             <h2>Les différences arrêt par arrêt</h2>
@@ -17,13 +18,13 @@
             <h3>
                 { opts.content[0].intro }
             </h3>
-            <hr>
+            <!-- <hr> -->
 
             <!-- <div class="byline">
                 Nicolas Bocquet (texte/videos), Félix Michel (données/code)
             </div> -->
 
-            <p>
+            <p style="margin-top: 40px;">
                 { opts.content[0].age }
             </p> 
 
@@ -67,8 +68,6 @@
         import { transition } from "d3-transition";
         import { easeLinear } from "d3-ease";
 
-        // TODO: make it correctly using enter, append, merge and selections
-
         // TODO: Ziate, Videos einbetten, Sidebar
 
         // Bugs: Animationen nur einmal ausführen, bei Resize keine Animation mehr machen
@@ -82,10 +81,12 @@
         var breakpoint_ml = 1199;
         var breakpoint_m = 520;
 
-        this.on("mount", () => {
-            drawBackground()
+        var that = this;
 
-            console.log(opts.content)
+        that.sidebar_data = 'bla';
+
+        that.on("mount", () => {
+            drawBackground()
         })
 
         function drawBackground () {
@@ -118,6 +119,7 @@
                 .attr("points", opts.svg_data[0].marseille)
 
             var frioul_shape_1 = svg.append("g")
+                .attr("id", "frioul1")
                 .attr("transform", function () { if (window.innerWidth > breakpoint_l) { 
                     return "translate(300, -300)" } else if (window.innerWidth > breakpoint_ml) {
                     return "translate(-75, -300)" } else if (window.innerWidth > breakpoint_m) {
@@ -133,6 +135,7 @@
                 .attr("d", opts.svg_data[0].frioul1)
 
             var frioul_shape_2 = svg.append("g")
+                .attr("id", "frioul2")
                 .attr("transform", function () { if (window.innerWidth > breakpoint_l) { 
                     return "translate(300, -300)" } else if (window.innerWidth > breakpoint_ml) {
                     return "translate(-75, -300)" } else if (window.innerWidth > breakpoint_m) {
@@ -254,6 +257,18 @@
                 .delay(function(d) { return d.animation_time; })
                 .style("opacity", 1)
                 .text(function(d) { return d.station; })
+
+            stations_enter.on("click", function (d) {
+                select(".intro").style("opacity", 0);
+                select("#frioul1").style("opacity", 0);
+                select("#frioul2").style("opacity", 0);
+                select(".sidebar").style("visibility", "visible");
+                select(".sidebar").style("opacity", 1);
+
+                that.update({
+                    sidebar_data: d
+                })
+            })
 
         var metro_train = subway_line.append("g")
             .attr("class", "metro-train")

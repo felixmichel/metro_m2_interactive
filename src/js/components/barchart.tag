@@ -23,8 +23,6 @@
   });
 
   function drawChart () {
-
-  // TODO: make it correctly using enter, append, merge and selections
   
   var series = opts.series;
 
@@ -37,7 +35,7 @@
 	svg.attr("width", svg_width);
   svg.attr("height", svg_height);
 
-	var margin = {top: 35, right: 25, bottom: 175, left: 45},
+	var margin = {top: 35, right:  window.innerWidth < breakpoint_m ? 25 : 35, bottom: 175, left: 47},
 	width = +svg.attr("width") - margin.left - margin.right,
 	height = +svg.attr("height") - margin.top - margin.bottom;
 

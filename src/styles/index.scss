@@ -25,6 +25,9 @@ body {
   margin: 0 auto;
   max-width: $XL;
   background-color: $background-color;
+  @include MQ(S) {
+    width: 100%;
+  }
 }
 
 #background_wrapper {
@@ -58,6 +61,7 @@ header {
   margin-left: 5vw;
   width: 40vw;               
   animation: showIntro 1.5s ease-in 6s forwards;
+  transition: 0.5s;
   @include MQ(S) {
     text-align: center;
     margin-left: 0;
@@ -118,7 +122,7 @@ header {
 }
 
 h3 {
-  padding-top: $vertical-padding;
+  padding-top: $vertical-padding * 2;
   font-family: $title-font;
   font-size: 30px;
   font-weight: 400;
@@ -143,8 +147,11 @@ hr {
 h4 {
   font-size: 36px;
   font-family: $title-font;
-  margin-bottom: $vertical-padding;
+  margin-bottom: $vertical-padding * 2;
   font-weight: 500;
+  @include MQ(S) {
+    font-size: 24px;
+  }
 }
 
 p {
@@ -156,7 +163,7 @@ p {
   margin-left: -15%;
   width: 130%;
   float: left;
-  @include MQ(M) {
+  @include MQ(L) {
     margin-left: 0;
     width: 100%;
   }
@@ -164,6 +171,7 @@ p {
 
 .wrapper {
   float: left;
+  padding-right: $vertical-padding;
 }
 
 @keyframes showIntro {
@@ -236,10 +244,43 @@ p {
 }
 
 .stations-text {
+  cursor: pointer;
   fill: $font-brown;
   font-size: 16px;
   @include MQ(S) {
     font-size: 14px;
   }
+}
+
+.station {
+  cursor: pointer;
+}
+
+.sidebar {
+  visibility: hidden;
+  opacity: 0;
+  overflow-x: hidden;
+  z-index: 1;
+  background-color: #A0BEC9;
+  color: $font-brown;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 450px;
+  transition: 0.5s;
+  padding: $vertical-padding * 2;
+  & h1 {
+    /*font-weight: 700;*/
+    text-transform: uppercase;
+    font-family: $big-font;
+    font-size: 30px;
+  }
+  @include MQ(S) {
+    height: 100%;
+    width: 100%;
+    padding: $vertical-padding;
+  }
 
 }
+
+/*#A0BEC9*/
