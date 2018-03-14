@@ -12,7 +12,7 @@ import './components/sidebar.tag'
 import { csv, json } from 'd3-fetch'
 
 Promise.all([
-  csv('/data/stations.csv', (stations) => {
+  csv('data/stations.csv', (stations) => {
     stations.position_x = +stations.position_x
     stations.position_y = +stations.position_y
     stations.animation_time = +stations.animation_time
@@ -20,8 +20,8 @@ Promise.all([
     stations.text_y = +stations.text_y
     return stations
   }),
-  json('/data/svg_data.json'),
-  json('/data/content.json')
+  json('data/svg_data.json'),
+  json('data/content.json')
 ])
 .then(([stations, svg, content]) => {
   mount('metro-app', {

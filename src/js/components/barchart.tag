@@ -47,7 +47,7 @@
 	var g = svg.append("g")
 		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-	csv("/data/m2_stat.csv", function(d) {
+	csv("data/m2_stat.csv", function(d) {
 		d[series] = +d[series];
 		return d; })
 	.then(function(data) {

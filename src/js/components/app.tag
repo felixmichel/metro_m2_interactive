@@ -1,19 +1,20 @@
 <metro-app>
-    <header class="container" id="background_wrapper">
-        <metro-sidebar class="sidebar" data="{ sidebar_data }"></metro-sidebar>
-        <div class="intro">
-            <h1>Les inégalités de Marseille</h1>
-            <h2>Les différences arrêt par arrêt</h2>
-            <p class="author">Une enquête de <span>Nicolas Bocquet et Félix Michel</span></p>
-        </div>
-        <svg id="map_background"></svg>
-    </header>
-<!--         <div class="scroll-indicator">
-            <div class="scroll-indicator-inner">
-            </div>
-            
-        </div> -->
-    <section class="container">
+  <header class="container" id="background_wrapper">
+    <metro-sidebar class="sidebar" data="{ sidebar_data }"></metro-sidebar>
+    <div class="intro">
+      <h1>Les inégalités de Marseille</h1>
+      <h2>Les différences arrêt par arrêt</h2>
+      <p class="author">Une enquête de <span>Nicolas Bocquet et Félix Michel</span></p>
+    </div>
+    <svg id="map_background"></svg>
+
+    <div class="scroll-indicator">
+      <span class="scroll-text">Scroller</span>
+      <a href="#main" class="scroll-indicator-inner"></a>
+    </div>
+  </header>
+
+    <section id="main" class="container">
         <article class="content">
             <h3>
                 { opts.content[0].intro }
@@ -66,6 +67,10 @@
     import { select } from 'd3-selection'
     import { easeLinear } from 'd3-ease'
 
+    this.scrollTo = function (e) {
+      location.hash = '#main'
+    }
+
     // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Hover-Click-State-Subway-Line, Real-Data for Sidebar, Click-Indicator for Sidebar, Scroll-Indicator for Analysis, Close-Button Mobile
 
     // Bugs: Animationen nur einmal ausführen, bei Resize keine Animation mehr machen
@@ -109,7 +114,7 @@
           } else if (window.innerWidth > breakpointMid) {
             return 'translate(-300, -300)'
           } else if (window.innerWidth < breakpointMid) {
-            return 'translate(-625, -200)scale(0.75)'
+            return 'translate(-625, -220)scale(0.75)'
           }
         })
           .attr('stroke-width', 2)
@@ -128,7 +133,7 @@
             } else if (window.innerWidth > breakpointMid) {
               return 'translate(-300, -300)'
             } else if (window.innerWidth < breakpointMid) {
-              return 'translate(-625, -200)scale(0.75)'
+              return 'translate(-625, -220)scale(0.75)'
             }
           })
           .attr('stroke-width', 2)
@@ -148,7 +153,7 @@
             } else if (window.innerWidth > breakpointMid) {
               return 'translate(-300, -300)'
             } else if (window.innerWidth < breakpointMid) {
-              return 'translate(-625, -200)scale(0.75)'
+              return 'translate(-625, -220)scale(0.75)'
             }
           })
           .attr('stroke-width', 2)
@@ -167,7 +172,7 @@
           } else if (window.innerWidth > breakpointMid) {
             return 'translate(-300, -300)'
           } else if (window.innerWidth < breakpointMid) {
-            return 'translate(-625, -200)scale(0.75)'
+            return 'translate(-625, -220)scale(0.75)'
           }
         })
 
@@ -199,7 +204,7 @@
             } else if (window.innerWidth > breakpointMid) {
               return 'translate(620, 40)'
             } else if (window.innerWidth < breakpointMid) {
-              return 'translate(65, 50)'
+              return 'translate(65, 30)'
             }
           })
 
@@ -300,6 +305,7 @@
         select('#frioul2').style('opacity', 0)
         select('.sidebar').style('visibility', 'visible')
         select('.sidebar').style('opacity', 1)
+        select('#indicator_arrow').style('display', 'none')
 
         that.update({
           sidebar_data: d
@@ -349,6 +355,34 @@
           }
         }
       }
+
+  var arrow = svg.append('g')
+    .attr('id', 'indicator_arrow')
+    .attr('fill', '#C9B49D')
+    .attr('transform', function () {
+            if (window.innerWidth > breakpointLarge) {
+              return 'translate(500, 500)'
+            } else if (window.innerWidth > breakpointMidLarge) {
+              return 'translate(900, 400)'
+            } else if (window.innerWidth > breakpointMid) {
+              return 'translate(200, 200)'
+            } else if (window.innerWidth < breakpointMid) {
+              return 'translate(0, 0)scale(0.75)'
+            }
+          })
+  
+  arrow.append('path')
+    .attr('d', opts.svg_data[0].arrow1)
+
+  arrow.append("path")
+    .attr('d', opts.svg_data[0].arrow2)
+
+  arrow.append('text')
+    .attr('x', -30)
+    .attr('y', 55)
+    .text('Cliquer')
+
+    
   subwayLine.exit().remove()
 }
 // Redraw based on the new size whenever the browser window is resized.

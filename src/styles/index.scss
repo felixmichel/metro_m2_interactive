@@ -39,18 +39,67 @@ header {
 }
 
 .scroll-indicator {
-  cursor: pointer;
+  z-index: 2;
+  visibility: hidden;
   position: absolute;
-  bottom: 0;
+  top: 95%;
   left: 50%;
-  z-index: 5;
-    &-inner {
-      height: 0;
-      width: 0;
-      border-bottom: 40px solid $font-brown;
-      border-left: 40px solid transparent;
-      border-right: 40px solid transparent;
+  transform: translate(-50%, -50%);
+  width: 0;
+  opacity: 0.8;
+  animation: showIntro 1.5s ease-in 6s forwards;
+  @include MQ(S) {
+    top: 98%; 
     }
+  @include MQ(XS) {
+    display: none;
+  }
+}
+
+.scroll-text {
+  left: -20px;
+  top: -45px;
+  position: absolute;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.scroll-indicator-inner {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  animation: animate 2s infinite;
+}
+
+.scroll-indicator-inner:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -15px;
+    width: 30px;
+    height: 30px;
+    border-bottom: 5px solid $font-brown;
+    border-right: 5px solid $font-brown;
+    transform: rotate(45deg);
+    @include MQ(S) {
+    left: -1px;
+    width: 20px;
+    height: 20px;
+      
+    }
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7.5px);
+  }
+  100% {
+    transform: translateY(0);
+
+  }
 }
 
 .intro {
@@ -135,18 +184,18 @@ h3 {
 hr {
   display: block;
   border: 0;
-  border-top: 1px solid $background-color;
+  border-top: 1px solid $font-brown;
   margin: 1em 0;
   padding: 0;
-  background: $primary-color;
-  height: 4px;
+  background: $font-brown;
+  height: 1px;
   width: 150px;
   border-radius: 1px;
 }
 
 h4 {
   font-size: 36px;
-  font-family: $title-font;
+  font-family: $byline-font;
   margin-bottom: $vertical-padding * 2;
   font-weight: 500;
   @include MQ(S) {
@@ -252,6 +301,16 @@ p {
   }
 }
 
+#indicator_arrow {
+  visibility: hidden;
+  animation: showIntro 1.5s ease-in 6s forwards;
+  & text {
+  fill: $light-brown;
+  font-size: 14px;
+  font-weight: 700;
+}
+}
+
 .station {
   cursor: pointer;
 }
@@ -267,13 +326,17 @@ p {
   margin-left: 0;
   width: 500px;
   transition: 0.5s;
-  padding: $vertical-padding * 2;
+  padding: $vertical-padding $vertical-padding * 2;
   padding-bottom: 0;
   & h1 {
-    /*font-weight: 700;*/
-    /*text-transform: uppercase;*/
-    font-family: $title-font;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: $big-font;
     font-size: 30px;
+    margin-bottom: $vertical-padding;
+    @include MQ(S) {
+      font-size: 20px;
+    }
   }
   @include MQ(S) {
     height: 100%;
@@ -281,6 +344,10 @@ p {
     padding: $vertical-padding;
   }
 
+}
+
+.sidebar-intro {
+  font-size: 18px;
 }
 
 .poster {
@@ -291,12 +358,16 @@ p {
   &-icon {
     clear: both;
     float: left;
-    padding-right: $vertical-padding / 2;
+    padding-right: $vertical-padding;
   }
   &-label {
-    font-family: $title-font;
+    font-family: $byline-font;
+    font-weight: 500;
     font-size: 24px;
-    padding-top: 8px;
+    padding-top: 5px;
+     @include MQ(S) {
+      font-size: 18px;
+    }
   }
 }
 

@@ -1,15 +1,16 @@
 <metro-sidebar>
 	<h1>{ opts.data.station }</h1>
-	<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+	<p class="sidebar-intro">{ opts.data.intro }</p>
+	<!-- <hr> -->
 	<div class="poster">
 		<div>
-			<img src="img/pop.svg" class="poster-icon"><h2 class="poster-label">35% moins de 18 ans</h2>
+			<img width="15%" src="img/pop.svg" class="poster-icon"><h2 class="poster-label">{ opts.data.data_point1 }</h2>
 		</div>
 		<div class="poster-container">
-			<img src="img/money.svg" class="poster-icon"><h2 class="poster-label">35% moins de 18 ans</h2>
+			<img  width="15%" src="img/money.svg" class="poster-icon"><h2 class="poster-label">35% moins de 18 ans</h2>
 		</div>
 		<div>
-			<img src="img/bakery.svg" class="poster-icon"><h2 class="poster-label">35% moins de 18 ans</h2>
+			<img  width="15%" src="img/bakery.svg" class="poster-icon"><h2 class="poster-label">35% moins de 18 ans</h2>
 		</div>
 	</div>
 
