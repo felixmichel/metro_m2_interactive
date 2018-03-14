@@ -386,7 +386,15 @@
   subwayLine.exit().remove()
 }
 // Redraw based on the new size whenever the browser window is resized.
-window.onresize = function () { drawBackground(); riot.update() }
+
+function reDraw () {
+  drawBackground()
+  riot.update()
+}
+
+window.addEventListener('resize', reDraw)
+
+if (window.innerWidth < 768) window.removeEventListener('resize',reDraw)
 
 </script>
 </metro-app>
