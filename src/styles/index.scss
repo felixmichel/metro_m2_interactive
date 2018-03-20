@@ -52,7 +52,7 @@ header {
     top: 98%; 
     }
   @include MQ(XS) {
-    display: none;
+    
   }
 }
 
@@ -68,7 +68,8 @@ header {
   position: absolute;
   cursor: pointer;
   top: 0;
-  animation: animate 2s infinite;
+  animation: animate 2s;
+  animation-iteration-count: 10;
 }
 
 .scroll-indicator-inner:before {
@@ -103,6 +104,8 @@ header {
 }
 
 .intro {
+  opacity: 1;
+  display: block;
   color: $font-brown;
   visibility: hidden;
   position: absolute;
@@ -110,7 +113,6 @@ header {
   margin-left: 5vw;
   width: 40vw;               
   animation: showIntro 1.5s ease-in 6s forwards;
-  transition: 0.5s;
   @include MQ(S) {
     text-align: center;
     margin-left: 0;
@@ -229,20 +231,22 @@ p {
     100% {opacity:100%; visibility: visible;}
 }
 
-.small-chart {
-  width: 33%;
-  @include MQ(M) {
-    width: 100%;
-  }
+.large-chart {
+  width: 100%;
 }
+
 .medium-chart {
   width: 50%;
   @include MQ(M) {
     width: 100%;
   }
 }
-.large-chart {
-  width: 100%;
+
+.small-chart {
+  width: 33%;
+  @include MQ(M) {
+    width: 100%;
+  }
 }
 
 .axis--x path {
@@ -279,11 +283,10 @@ p {
 .bar-value {
   font-size: 13px;
   font-family: $text-font;
-  fill: $background-color;
+  fill: $dark-brown;
+  font-weight: 700;
   @include MQ(S) {
     font-size: 10px;
-    fill: $dark-brown;
-
   }
 }
 
@@ -317,7 +320,9 @@ p {
 
 .sidebar {
   visibility: hidden;
-  opacity: 0;
+  transform: translateX(-100%);
+  transition: 1.5s;
+  transition-timing-function: ease-in-out;
   z-index: 1;
   background-color: #A0BEC9;
   color: $font-brown;
@@ -346,6 +351,25 @@ p {
 
 }
 
+.move-in {
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.close {
+  opacity: 0;
+  font-size: 35px;
+  font-weight: 700;
+  position: absolute;
+  left: 440px;
+  cursor: pointer;
+  top: 15px;
+  @include MQ(S) {
+    left: 89%;
+    top: 10px;
+  }
+}
+
 .sidebar-intro {
   font-size: 18px;
 }
@@ -368,6 +392,20 @@ p {
      @include MQ(S) {
       font-size: 18px;
     }
+  }
+}
+
+.mobile {
+  display: none; 
+  @include MQ(S) {
+    display: block;
+  }
+}
+
+.desktop {
+  display: block; 
+  @include MQ(S) {
+    display: none;
   }
 }
 

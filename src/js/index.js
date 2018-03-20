@@ -11,6 +11,15 @@ import './components/barchart.tag'
 import './components/sidebar.tag'
 import { csv, json } from 'd3-fetch'
 
+function TriggerChart () {
+  var self = this
+  self.triggered = false
+  riot.observable(self)
+  self.on('draw', function () {
+    self.triggered = true
+  })
+}
+
 Promise.all([
   csv('data/stations.csv', (stations) => {
     stations.position_x = +stations.position_x
@@ -25,6 +34,7 @@ Promise.all([
 ])
 .then(([stations, svg, content]) => {
   mount('metro-app', {
+    chartTrigger: new TriggerChart(),
     stations: stations,
     svg_data: svg,
     content: content

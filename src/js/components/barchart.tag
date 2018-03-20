@@ -9,7 +9,8 @@
   import { scaleBand, scaleLinear } from "d3-scale";
   import { min, max } from "d3-array";
   import { axisBottom, axisLeft } from "d3-axis";
-  import { transition } from "d3-transition";
+  import { transition } from 'd3-transition'
+  import { format } from 'd3-format'
 
   var primary_color = opts.color;
   var background_color = "#EDE6DE";
@@ -18,24 +19,24 @@
   var breakpoint_ml = 1199;
   var breakpoint_m = 520;
 
-  this.on("updated", () => {
-  	drawChart();
-  });
+  opts.scrollevent.on('draw', function () {
+    drawChart()
+  })
 
   function drawChart () {
   
   var series = opts.series;
 
   //var svg_width = Math.max(0, window.innerWidth),
-	var svg = select("#" + opts.series),
-  svg_width = select(".wrapper").node().getBoundingClientRect().width,
-  svg_height = opts.height ? ops.height : 500;
+	var svg = select("#" + opts.series)
+  var svg_width = svg.node().parentNode.getBoundingClientRect().width
+  var svg_height = opts.height ? opts.height : 500;
 
 	svg.selectAll("*").remove();
 	svg.attr("width", svg_width);
   svg.attr("height", svg_height);
 
-	var margin = {top: 35, right:  window.innerWidth < breakpoint_m ? 25 : 35, bottom: 175, left: 47},
+	var margin = {top: 35, right: window.innerWidth < breakpoint_m ? 25 : 35, bottom: 175, left: 47},
 	width = +svg.attr("width") - margin.left - margin.right,
 	height = +svg.attr("height") - margin.top - margin.bottom;
 
@@ -55,11 +56,13 @@
 		x.domain(data.map(function(d) { return d.station; }));
 		y.domain([0, opts.max_value ? opts.max_value : max_value]);
 
+    var formatting = format("d")
+
     var y_axis = g.append("g")
       .attr("class", "axis axis--y")
         .attr("fill", primary_color)
         .call(axisLeft(y).ticks(5)
-        .tickFormat(d => d + opts.suffix))
+        .tickFormat(d => formatting(d) + opts.suffix))
     
     y_axis.append("g")
       .attr("class", "chart-title")
@@ -103,7 +106,8 @@
     		.attr("width", x.bandwidth())
         .attr("fill", primary_color)
     		.transition()
-    		.duration(1500)
+        .delay(200)
+    		.duration(3000)
     		.attr("y", function(d) { return y(d[series]); })
     		.attr("height", function(d) { return height - y(d[series]); });
 
@@ -111,10 +115,9 @@
       .transition()
       .text(function(d) { return Math.round(d[series]) + opts.suffix; })
       .style("text-anchor", "middle")
-      .attr("x", window.innerWidth < breakpoint_m ? 12 : 15)
+      .attr("x", x.bandwidth() / 2)
       .attr("y", function(d) {
-        var offset;
-        window.innerWidth < breakpoint_m ? offset = -5 : offset = 15 
+        var offset = -5
         return y(d[series]) + offset; })
       .attr("opacity",  0);
 
@@ -187,7 +190,8 @@
   		.attr("d", "M19.8316327,0.135714286 L2.80561224,0.135714286 C1.39030612,0.135714286 0.240306122,1.26887755 0.240306122,2.65459184 L0.240306122,8.13571429 C0.240306122,9.55765306 1.41428571,10.7540816 2.80561224,10.7540816 L22.0316327,10.7540816 C23.4239796,10.7540816 24.6045918,9.55765306 24.6045918,8.13571429 L24.6045918,4.85357143 C24.6040816,2.25561224 22.4612245,0.135714286 19.8316327,0.135714286 Z M22.8153061,4.85357143 L22.8153061,7.12091837 L21.4020408,7.12091837 C20.7326531,7.12091837 20.1892857,6.58163265 20.1892857,5.91173469 L20.1892857,4.60561224 L22.8020408,4.60561224 C22.8102041,4.6877551 22.8153061,4.77040816 22.8153061,4.85357143 Z M11.6392857,8.96530612 L9.23571429,8.96530612 L9.23571429,4.60612245 L11.6392857,4.60612245 L11.6392857,8.96530612 L11.6392857,8.96530612 Z M22.0311224,8.96530612 L12.9806122,8.96530612 L12.9806122,3.93571429 C12.9806122,3.56530612 12.6795918,3.26581633 12.3102041,3.26581633 L8.56632653,3.26581633 C8.19540816,3.26581633 7.89642857,3.56581633 7.89642857,3.93571429 L7.89642857,8.96530612 L2.80561224,8.96530612 C2.39795918,8.96530612 2.02908163,8.57193878 2.02908163,8.13520408 L2.02908163,2.65459184 C2.02908163,2.24846939 2.36989796,1.92397959 2.80561224,1.92397959 L19.8316327,1.92397959 C20.880102,1.92397959 21.8015306,2.46020408 22.3336735,3.26530612 L19.5158163,3.26530612 C19.1459184,3.26530612 18.8479592,3.57142857 18.8479592,3.94234694 L18.8479592,5.91173469 C18.8479592,7.32244898 19.9918367,8.46173469 21.4020408,8.46173469 L22.7433673,8.46173469 C22.6158163,8.7505102 22.3336735,8.96530612 22.0311224,8.96530612 Z M6.1627551,3.26530612 L3.87193878,3.26530612 C3.50204082,3.26530612 3.20204082,3.56530612 3.20204082,3.93520408 L3.20204082,6.45102041 C3.20204082,6.82142857 3.50306122,7.12091837 3.87193878,7.12091837 L6.1627551,7.12091837 C6.53418367,7.12091837 6.83316327,6.82040816 6.83316327,6.45102041 L6.83316327,3.93520408 C6.83367347,3.56530612 6.53367347,3.26530612 6.1627551,3.26530612 Z M5.49234694,5.78010204 L4.54285714,5.78010204 L4.54285714,4.60612245 L5.49234694,4.60612245 L5.49234694,5.78010204 Z M17.0596939,3.26530612 L14.7688776,3.26530612 C14.3979592,3.26530612 14.0994898,3.56530612 14.0994898,3.93520408 L14.0994898,6.45102041 C14.0994898,6.82142857 14.3989796,7.12091837 14.7688776,7.12091837 L17.0596939,7.12091837 C17.4306122,7.12091837 17.7295918,6.82040816 17.7295918,6.45102041 L17.7295918,3.93520408 C17.730102,3.56530612 17.430102,3.26530612 17.0596939,3.26530612 Z M16.3887755,5.78010204 L15.4397959,5.78010204 L15.4397959,4.60612245 L16.3887755,4.60612245 L16.3887755,5.78010204 Z M23.7071429,11.3678571 L1.13163265,11.3678571 C0.761734694,11.3678571 0.461734694,11.6683673 0.461734694,12.0387755 C0.461734694,12.4086735 0.762755102,12.7081633 1.13163265,12.7081633 L23.7071429,12.7081633 C24.0785714,12.7081633 24.377551,12.4076531 24.377551,12.0387755 C24.377551,11.6683673 24.077551,11.3678571 23.7071429,11.3678571 Z")
 
   	metro_train.transition()
-  		.duration(1500)
+      .delay(200)
+  		.duration(3000)
   		.attr("transform", "translate(" + width + ", 3.5)")
   	});
 }

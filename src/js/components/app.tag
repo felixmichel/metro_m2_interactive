@@ -5,16 +5,19 @@
       <h1>Les inégalités de Marseille</h1>
       <h2>Les différences arrêt par arrêt</h2>
       <p class="author">Une enquête de <span>Nicolas Bocquet et Félix Michel</span></p>
+      <div class="scroll-indicator mobile">
+        <a href="#main" class="scroll-indicator-inner"></a>
+      </div>
     </div>
     <svg id="map_background"></svg>
 
-    <div class="scroll-indicator">
+    <div class="scroll-indicator desktop">
       <span class="scroll-text">Scroller</span>
       <a href="#main" class="scroll-indicator-inner"></a>
     </div>
   </header>
 
-    <section id="main" class="container">
+    <section id="main" class="container scrolly">
         <article class="content">
             <h3>
                 { opts.content[0].intro }
@@ -29,12 +32,19 @@
                 { opts.content[0].age }
             </p> 
 
+             <h4>Revenue</h4>
+             <section class="chart-container">
+              <metro-barchart scrollEvent={ opts.chartTrigger } title="Revenue" color="#FF3814" size="large-chart" series="revenue" suffix=" €"></metro-barchart>
+            </section>
+
+            <p>
+                { opts.content[0].age }
+            </p> 
+
             <h4>Étranger, immigré</h4>
             <section class="chart-container">
-               <!--  <metro-barchart title="" color="" size="small-chart" series="percent_francais" max_value="100"></metro-barchart> -->
-                <metro-barchart title="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
-                <metro-barchart title="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
-<!--                 <metro-barchart color="#7F1C0A" size="medium-chart" series="strangers" custom_axis=false></metro-barchart> -->
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
             </section>
             <p>
                 { opts.content[0].age }
@@ -45,14 +55,43 @@
             <p>
                 { opts.content[0].age }
             </p>
+            <h4>Omnipraticien</h4>
+             <section class="chart-container">
+              <metro-barchart scrollEvent={ opts.chartTrigger } title="Omnipraticien" color="#FF3814" size="large-chart" series="omnipraticien" suffix=""></metro-barchart>
+            </section>
+             <p>
+                { opts.content[0].age }
+            </p>
+            <p>
+                { opts.content[0].age }
+            </p>
+
+            <h4>Commerce</h4>
+
+            <section class="chart-container">
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Boulangerie" color="#FF3814" size="medium-chart" series="boulangerie" max_value="50" height="350" suffix=""></metro-barchart>
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Coiffeur" color="#FF7960" size="medium-chart" series="coiffeur"suffix="" height="350" max_value="50"></metro-barchart>
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Banque, caisse d'épargne" color="#CC2D10" size="medium-chart" series="banque" suffix="" height="350" max_value="50"></metro-barchart>
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Réparation voiture" color="#7F1C0A" size="medium-chart" series="voiture" max_value="50" height="350" suffix=""></metro-barchart>
+            </section>
+
             <h4>Age</h4>
             <section class="chart-container">
-                <metro-barchart title="Jeunes" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
-                <metro-barchart title="Vieux" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Jeunes" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Vieux" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
             </section>
             <p>
                 { opts.content[0].age }
             </p> 
+            <p>
+                { opts.content[0].age }
+            </p>
+
+            <h4>Restaurant</h4>
+
+            <section class="chart-container">
+                <metro-barchart scrollEvent={ opts.chartTrigger } title="Restaurant" color="#FF3814" size="large-chart" series="restaurant"  suffix=""></metro-barchart>
+            </section>
             <p>
                 { opts.content[0].age }
             </p>
@@ -67,15 +106,15 @@
     import { select } from 'd3-selection'
     import { easeLinear } from 'd3-ease'
 
-    this.scrollTo = function (e) {
-      location.hash = '#main'
-    }
+    import 'intersection-observer'
+    import scrollama from 'scrollama'
+    import { transition } from 'd3-transition'
 
-    // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Hover-Click-State-Subway-Line, Real-Data for Sidebar, Click-Indicator for Sidebar, Scroll-Indicator for Analysis, Close-Button Mobile
+    const scroller = scrollama()
 
-    // Bugs: Animationen nur einmal ausführen, bei Resize keine Animation mehr machen
+    // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Click-State-Subway-Line, Real-Data for Sidebar, Click-Indicator for Sidebar (Positioning Mobile), Lazy-Video-Loading
 
-    // Nice to have: Barchart-Quiz, Scroll Fanciness, kleiner parallax Effekt, Charts in position fixed, Veränderung der Charts beim Scrollen, Chart-Animation, sobald Animation im Viewport
+    // Nice to have: Barchart-Quiz, Scroll Fanciness, kleiner parallax Effekt, Charts in position fixed
 
     var primaryColor = '#FF3814'
     var backgroundColor = '#EDE6DE'
@@ -84,13 +123,25 @@
     var breakpointMidLarge = 1199
     var breakpointMid = 520
 
+    function drawBarChart (response) {
+        opts.chartTrigger.trigger('draw')
+    }
+
     var that = this
 
-    that.sidebar_data = 'bla'
+    that.sidebar_data = ''
 
     that.on('mount', () => {
       drawBackground()
+      scroller
+        .setup({
+          step: '.scrolly', // required - class name of trigger steps
+          once: true,
+          offset: 0.8
+        })
     })
+
+    scroller.onStepEnter(drawBarChart)
 
     function drawBackground () {
       var svg = select('#map_background')
@@ -247,6 +298,7 @@
 
       stationsEnter
           .append('circle')
+          .attr('class', 'inner-circle')
           .attr('cx', function (d) {
             if (window.innerWidth < breakpointMid) {
               return d.position_x * 0.75
@@ -299,17 +351,51 @@
           .style('opacity', 1)
           .text(function (d) { return d.station })
 
+      stationsEnter.attr('pointer-events', 'none')
+        .transition()
+        .delay(6000)
+        .attr('pointer-events', '')
+
+      stationsEnter.on("mouseenter", function(d, i) {
+        select(this).select('.inner-circle')
+          .transition()
+          .attr("fill", primaryColor)
+
+        select(this).select('text')
+          .transition()
+          .style("font-weight", 700)
+        })
+
+      stationsEnter.on("mouseleave", function(d, i) {
+        select(this).select('.inner-circle')
+          .transition()
+          .attr("fill", backgroundColor)
+
+        select(this).select('text')
+          .transition()
+          .style("font-weight", 400)
+        })
+
       stationsEnter.on('click', function (d) {
-        select('.intro').style('opacity', 0)
-        select('#frioul1').style('opacity', 0)
-        select('#frioul2').style('opacity', 0)
-        select('.sidebar').style('visibility', 'visible')
-        select('.sidebar').style('opacity', 1)
+
+        select('.intro').transition().style('opacity', 0)
+        select('#frioul1').transition().style('opacity', 0)
+        select('#frioul2').transition().style('opacity', 0)
+        select('.sidebar').attr('class', 'sidebar move-in')
+        select('.close').transition().duration(1000).style('opacity', 1)
+
         select('#indicator_arrow').style('display', 'none')
 
         that.update({
           sidebar_data: d
         })
+      })
+
+      select('.close').on('click', function () {
+        select('.sidebar').attr('class', 'sidebar')
+        select('.intro').transition().style('opacity', 1)
+        select('#frioul1').transition().style('opacity', 1)
+        select('#frioul2').transition().style('opacity', 1)
       })
 
   var metroTrain = subwayLine.append('g')
@@ -361,13 +447,13 @@
     .attr('fill', '#C9B49D')
     .attr('transform', function () {
             if (window.innerWidth > breakpointLarge) {
-              return 'translate(500, 500)'
+              return 'translate(1270, 390)'
             } else if (window.innerWidth > breakpointMidLarge) {
               return 'translate(900, 400)'
             } else if (window.innerWidth > breakpointMid) {
-              return 'translate(200, 200)'
+              return 'translate(675, 400)'
             } else if (window.innerWidth < breakpointMid) {
-              return 'translate(0, 0)scale(0.75)'
+              return 'translate(100, 300)scale(0.75)'
             }
           })
   
@@ -389,7 +475,7 @@
 
 function reDraw () {
   drawBackground()
-  riot.update()
+  drawBarChart()
 }
 
 window.addEventListener('resize', reDraw)
