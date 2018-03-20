@@ -1,12 +1,14 @@
 <metro-app>
   <header class="container" id="background_wrapper">
     <metro-sidebar class="sidebar" data="{ sidebar_data }"></metro-sidebar>
-    <div class="intro">
-      <h1>Les inégalités de Marseille</h1>
-      <h2>Les différences arrêt par arrêt</h2>
-      <p class="author">Une enquête de <span>Nicolas Bocquet et Félix Michel</span></p>
-      <div class="scroll-indicator mobile">
-        <a href="#main" class="scroll-indicator-inner"></a>
+    <div class="intro-pageload">
+      <div class="intro">
+        <h1>Les inégalités de Marseille</h1>
+        <h2>Les différences arrêt par arrêt</h2>
+        <p class="author">Une enquête de <span>Nicolas Bocquet et Félix Michel</span></p>
+        <div class="scroll-indicator mobile">
+          <a href="#main" class="scroll-indicator-inner"></a>
+        </div>
       </div>
     </div>
     <svg id="map_background"></svg>
@@ -112,7 +114,7 @@
 
     const scroller = scrollama()
 
-    // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Click-State-Subway-Line, Real-Data for Sidebar, Click-Indicator for Sidebar (Positioning Mobile), Lazy-Video-Loading
+    // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Real-Data for Sidebar, Lazy-Video-Loading
 
     // Nice to have: Barchart-Quiz, Scroll Fanciness, kleiner parallax Effekt, Charts in position fixed
 
@@ -400,7 +402,6 @@
 
   var metroTrain = subwayLine.append('g')
       .attr('class', 'metro-train')
-      // .attr('fill', '#52412F')
       .attr('fill', primaryColor)
 
   metroTrain.append('path')

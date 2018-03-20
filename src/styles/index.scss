@@ -9,6 +9,7 @@
 }
 
 body {
+  -webkit-transform: translate3d(0, 0, 0);
   background-color: white;
   color: $font-brown;
   /*padding: $vertical-padding / 2; */
@@ -22,6 +23,7 @@ body {
 }
 
 .container {
+  -webkit-backface-visibility: hidden;
   margin: 0 auto;
   max-width: $XL;
   background-color: $background-color;
@@ -68,8 +70,7 @@ header {
   position: absolute;
   cursor: pointer;
   top: 0;
-  animation: animate 2s;
-  animation-iteration-count: 10;
+  animation: animate 2s infinite;
 }
 
 .scroll-indicator-inner:before {
@@ -103,16 +104,18 @@ header {
   }
 }
 
-.intro {
-  opacity: 1;
-  display: block;
-  color: $font-brown;
+.intro-pageload {
+  animation: showIntro 1.5s ease-in 6s forwards;
   visibility: hidden;
+  opacity: 1;
+}
+
+.intro {
+  color: $font-brown;
   position: absolute;
   margin-top: 15vh;
   margin-left: 5vw;
   width: 40vw;               
-  animation: showIntro 1.5s ease-in 6s forwards;
   @include MQ(S) {
     text-align: center;
     margin-left: 0;
@@ -156,6 +159,11 @@ header {
     display: none;
   }
   }
+}
+
+.hide-intro {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .content {
@@ -321,7 +329,7 @@ p {
 .sidebar {
   visibility: hidden;
   transform: translateX(-100%);
-  transition: 1.5s;
+  transition: .5s;
   transition-timing-function: ease-in-out;
   z-index: 1;
   background-color: #A0BEC9;
@@ -329,8 +337,9 @@ p {
   position: absolute;
   margin-top: 0;
   margin-left: 0;
-  width: 500px;
-  transition: 0.5s;
+  width: 40vw;
+  height: 100vh;
+  max-height: 1200px;
   padding: $vertical-padding $vertical-padding * 2;
   padding-bottom: 0;
   & h1 {
@@ -361,7 +370,7 @@ p {
   font-size: 35px;
   font-weight: 700;
   position: absolute;
-  left: 440px;
+  left: 90%;
   cursor: pointer;
   top: 15px;
   @include MQ(S) {
@@ -407,6 +416,20 @@ p {
   @include MQ(S) {
     display: none;
   }
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  padding-top: 25px;
+  height: 0;
+}
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /*#A0BEC9*/
