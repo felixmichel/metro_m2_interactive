@@ -2,10 +2,15 @@
 @import 'variables';
 @import 'mixins';
 
+html {
+  font-size: 62.5%; /* Sets up the Base 10 stuff */
+}
+
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -15,10 +20,10 @@ body {
   /*padding: $vertical-padding / 2; */
   margin: 0 auto;
   font-family: $text-font;
-  font-size: 20px;
+  @include font-size(2);
   line-height: 1.5;
   @include MQ(S) {
-    font-size: 18px;
+    @include font-size(1.8);
   }
 }
 
@@ -44,7 +49,7 @@ header {
   z-index: 2;
   visibility: hidden;
   position: absolute;
-  top: 95%;
+  top: 90vh;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 0;
@@ -52,9 +57,6 @@ header {
   animation: showIntro 1.5s ease-in 6s forwards;
   @include MQ(S) {
     top: 98%; 
-    }
-  @include MQ(XS) {
-    
   }
 }
 
@@ -71,6 +73,13 @@ header {
   cursor: pointer;
   top: 0;
   animation: animate 2s infinite;
+  &:visited {
+    border-color: $font-brown;
+  }
+  &:hover:before {
+    transition: 0.2s;
+    border-color: darken($font-brown, 15%);
+  }
 }
 
 .scroll-indicator-inner:before {
@@ -87,7 +96,6 @@ header {
     left: -1px;
     width: 20px;
     height: 20px;
-      
     }
 }
 
@@ -130,22 +138,22 @@ header {
   & h1 {
     font-family: $big-font;
     text-transform: uppercase;
-    font-size: 76px;
+    @include font-size(8);
     font-weight: 700;
     margin-bottom: 10px;
     line-height: 1;
     @include MQ(S) {
-    font-size: 38px;
+    @include font-size(4);
   }
   }
   & h2 {
     font-family: $byline-font;
-    font-size: 36px;
+    @include font-size(3.6);
     line-height: 1.2;
     margin-bottom: 10px;
     font-weight: 500;
     @include MQ(S) {
-    font-size: 24px;
+    @include font-size(2.4);
   }
   }
   & .author {
@@ -167,7 +175,7 @@ header {
 }
 
 .content {
-  padding: $vertical-padding;
+  padding: 0 $vertical-padding;
   max-width: $M;
   margin: 0 auto;
 }
@@ -183,7 +191,7 @@ header {
 h3 {
   padding-top: $vertical-padding * 2;
   font-family: $title-font;
-  font-size: 30px;
+  @include font-size(3);
   font-weight: 400;
   @include MQ(S) {
     margin-top: $vertical-padding;
@@ -216,6 +224,39 @@ h4 {
 p {
   margin-bottom: $vertical-padding;
   clear: both;
+}
+
+b {
+  font-weight: 700;
+}
+
+a {
+  text-decoration: none;
+}
+
+.link {
+  position: relative;
+  color: $primary-color;
+  width: 0%;
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: $primary-color;
+    visibility: hidden;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  &:hover:before {
+    visibility: visible;
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
 }
 
 .chart-container {
@@ -346,7 +387,7 @@ p {
     font-weight: 700;
     text-transform: uppercase;
     font-family: $big-font;
-    font-size: 30px;
+    @include font-size(3);
     margin-bottom: $vertical-padding;
     @include MQ(S) {
       font-size: 20px;

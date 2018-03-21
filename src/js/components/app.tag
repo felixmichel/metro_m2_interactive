@@ -19,87 +19,55 @@
     </div>
   </header>
 
-    <section id="main" class="container scrolly">
-        <article class="content">
-            <h3>
-                { opts.content[0].intro }
-            </h3>
-            <!-- <hr> -->
+  <main id="main" class="container scrolly">
+    <article class="content">
+      <h3>{ opts.spreadsheet[0].gsx$titre.$t }</h3>
+      <p style="margin-top: 40px;">
+          { opts.spreadsheet[0].gsx$contenu.$t }
+      </p> 
+    </article>
+    <!-- <hr> -->
 
-            <!-- <div class="byline">
-                Nicolas Bocquet (texte/videos), Félix Michel (données/code)
-            </div> -->
+    <!-- <div class="byline">
+        Nicolas Bocquet (texte/videos), Félix Michel (données/code)
+    </div> -->
+    <article each={ opts.spreadsheet } class="content" if={ gsx$sujet.$t != 'introduction' }>
+      <h4 if={ gsx$sujet.$t != 'introduction' }>{ gsx$titre.$t }</h4>
 
-            <p style="margin-top: 40px;">
-                { opts.content[0].age }
-            </p> 
+      <figure if={ gsx$sujet.$t == 'revenue' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Revenue" color="#FF3814" size="large-chart" series="revenue" suffix=" €"></metro-barchart>
+      </figure>
+      
+      <figure if={ gsx$sujet.$t == 'étranger' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
+      </figure>
 
-             <h4>Revenue</h4>
-             <section class="chart-container">
-              <metro-barchart scrollEvent={ opts.chartTrigger } title="Revenue" color="#FF3814" size="large-chart" series="revenue" suffix=" €"></metro-barchart>
-            </section>
+      <figure if={ gsx$sujet.$t == 'santé' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Omnipraticien" color="#FF3814" size="large-chart" series="omnipraticien" suffix=""></metro-barchart>
+      </figure>
 
-            <p>
-                { opts.content[0].age }
-            </p> 
+      <figure if={ gsx$sujet.$t == 'commerce' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Boulangerie" color="#FF3814" size="medium-chart" series="boulangerie" max_value="50" height="350" suffix=""></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Coiffeur" color="#FF7960" size="medium-chart" series="coiffeur"suffix="" height="350" max_value="50"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Banque, caisse d'épargne" color="#CC2D10" size="medium-chart" series="banque" suffix="" height="350" max_value="50"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Réparation voiture" color="#7F1C0A" size="medium-chart" series="voiture" max_value="50" height="350" suffix=""></metro-barchart>
+      </figure>
 
-            <h4>Étranger, immigré</h4>
-            <section class="chart-container">
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
-            </section>
-            <p>
-                { opts.content[0].age }
-            </p> 
-            <p>
-                { opts.content[0].age }
-            </p>
-            <p>
-                { opts.content[0].age }
-            </p>
-            <h4>Omnipraticien</h4>
-             <section class="chart-container">
-              <metro-barchart scrollEvent={ opts.chartTrigger } title="Omnipraticien" color="#FF3814" size="large-chart" series="omnipraticien" suffix=""></metro-barchart>
-            </section>
-             <p>
-                { opts.content[0].age }
-            </p>
-            <p>
-                { opts.content[0].age }
-            </p>
+      <figure if={ gsx$sujet.$t == 'age' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Jeunes" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Vieux" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
+      </figure>
 
-            <h4>Commerce</h4>
+      <figure if={ gsx$sujet.$t == 'restaurant' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Restaurant" color="#FF3814" size="large-chart" series="restaurant"  suffix=""></metro-barchart>
+      </figure>
 
-            <section class="chart-container">
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Boulangerie" color="#FF3814" size="medium-chart" series="boulangerie" max_value="50" height="350" suffix=""></metro-barchart>
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Coiffeur" color="#FF7960" size="medium-chart" series="coiffeur"suffix="" height="350" max_value="50"></metro-barchart>
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Banque, caisse d'épargne" color="#CC2D10" size="medium-chart" series="banque" suffix="" height="350" max_value="50"></metro-barchart>
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Réparation voiture" color="#7F1C0A" size="medium-chart" series="voiture" max_value="50" height="350" suffix=""></metro-barchart>
-            </section>
+      <p if={ gsx$sujet.$t != 'introduction' }>
+        <raw content="{ gsx$contenu.$t }"></raw>
+      </p>
 
-            <h4>Age</h4>
-            <section class="chart-container">
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Jeunes" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Vieux" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
-            </section>
-            <p>
-                { opts.content[0].age }
-            </p> 
-            <p>
-                { opts.content[0].age }
-            </p>
-
-            <h4>Restaurant</h4>
-
-            <section class="chart-container">
-                <metro-barchart scrollEvent={ opts.chartTrigger } title="Restaurant" color="#FF3814" size="large-chart" series="restaurant"  suffix=""></metro-barchart>
-            </section>
-            <p>
-                { opts.content[0].age }
-            </p>
-
-        </article>
-    </section>
+    </main>
 
     <footer class="container"></footer>
 
@@ -114,7 +82,7 @@
 
     const scroller = scrollama()
 
-    // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Real-Data for Sidebar, Lazy-Video-Loading
+    // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Real-Data for Sidebar, Lazy-Video-Loading, Footer
 
     // Nice to have: Barchart-Quiz, Scroll Fanciness, kleiner parallax Effekt, Charts in position fixed
 
@@ -134,6 +102,7 @@
     that.sidebar_data = ''
 
     that.on('mount', () => {
+      console.log(opts)
       drawBackground()
       scroller
         .setup({
@@ -142,7 +111,6 @@
           offset: 0.8
         })
     })
-
     scroller.onStepEnter(drawBarChart)
 
     function drawBackground () {
@@ -472,8 +440,8 @@
     
   subwayLine.exit().remove()
 }
-// Redraw based on the new size whenever the browser window is resized.
 
+// Redraw based on the new size whenever the browser window is resized.
 function reDraw () {
   drawBackground()
   drawBarChart()
