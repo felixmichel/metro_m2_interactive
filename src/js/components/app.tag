@@ -63,6 +63,14 @@
         <metro-barchart scrollEvent={ opts.chartTrigger } title="Restaurant" color="#FF3814" size="large-chart" series="restaurant"  suffix=""></metro-barchart>
       </figure>
 
+      <figure if={ gsx$sujet.$t == 'chomage' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Chômage" color="#FF3814" size="large-chart" series="chomage"  suffix="%"></metro-barchart>
+      </figure>
+
+      <figure if={ gsx$sujet.$t == 'airbnb' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Airbnb" color="#FF3814" size="large-chart" series="airbnb"  suffix=""></metro-barchart>
+      </figure>
+
       <p if={ gsx$sujet.$t != 'introduction' }>
         <raw content="{ gsx$contenu.$t }"></raw>
       </p>
