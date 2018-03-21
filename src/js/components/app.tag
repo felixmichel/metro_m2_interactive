@@ -22,15 +22,14 @@
   <main id="main" class="container scrolly">
     <article class="content">
       <h3>{ opts.spreadsheet[0].gsx$titre.$t }</h3>
+      <p class="byline">
+        Nicolas Bocquet (texte/videos), Félix Michel (données/code)
+      </p>
       <p style="margin-top: 40px;">
           { opts.spreadsheet[0].gsx$contenu.$t }
       </p> 
     </article>
     <!-- <hr> -->
-
-    <!-- <div class="byline">
-        Nicolas Bocquet (texte/videos), Félix Michel (données/code)
-    </div> -->
     <article each={ opts.spreadsheet } class="content" if={ gsx$sujet.$t != 'introduction' }>
       <h4 if={ gsx$sujet.$t != 'introduction' }>{ gsx$titre.$t }</h4>
 
@@ -126,7 +125,9 @@
       var svgWidth = select('#background_wrapper').node().getBoundingClientRect().width
       var svgHeight = Math.min(1200, window.innerHeight)
 
-      if (window.innerWidth < breakpointMid) svgHeight = 600
+
+      // if (window.innerHeight < 850) svgHeight = 700
+      if (window.innerHeight < 700) svgHeight = 600
 
       svg.selectAll('*').remove()
 

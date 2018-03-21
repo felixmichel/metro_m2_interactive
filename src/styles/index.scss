@@ -58,6 +58,7 @@ header {
   animation: showIntro 1.5s ease-in 6s forwards;
   @include MQ(S) {
     top: 98%; 
+    background-color: $background-color;
   }
 }
 
@@ -126,6 +127,7 @@ header {
   margin-left: 5vw;
   width: 40vw;               
   @include MQ(S) {
+    /*background-color: $background-color;*/
     text-align: center;
     margin-left: 0;
     margin-top: 75vh;
@@ -182,11 +184,16 @@ header {
 }
 
 .byline {
+  display: none;
+  @include font-size(1.6);
   padding-top: $vertical-padding;
-  padding-bottom: 2 * $vertical-padding;
   /*text-transform: uppercase;*/
   color: $primary-color;
   font-weight: 700;
+  @include MQ(S) {
+    display: block;
+  }
+
 }
 
 h3 {
@@ -195,7 +202,7 @@ h3 {
   @include font-size(3);
   font-weight: 400;
   @include MQ(S) {
-    margin-top: $vertical-padding;
+    padding-top: $vertical-padding * 4;
     font-size: 20px;
   }
 }
