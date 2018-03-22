@@ -127,7 +127,7 @@
 
 
       // if (window.innerHeight < 850) svgHeight = 700
-      if (window.innerHeight < 700) svgHeight = 600
+      if (window.innerHeight < 650) svgHeight = 600
 
       svg.selectAll('*').remove()
 
