@@ -23,7 +23,7 @@
     <article class="content">
       <h3>{ opts.spreadsheet[0].gsx$titre.$t }</h3>
       <p class="byline">
-        Nicolas Bocquet (texte/videos), Félix Michel (données/code)
+        Nicolas Bocquet et Félix Michel
       </p>
       <p style="margin-top: 40px;">
           { opts.spreadsheet[0].gsx$contenu.$t }
@@ -34,12 +34,14 @@
       <h4 if={ gsx$sujet.$t != 'introduction' }>{ gsx$titre.$t }</h4>
 
       <figure if={ gsx$sujet.$t == 'revenue' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Revenue" color="#FF3814" size="large-chart" series="revenue" suffix=" €"></metro-barchart>
+        <metro-quiz onanswerclick="{ this.showAnswer }" quizId="quiz1" headline={ gsx$quizheadline.$t } right={ gsx$quizright.$t } wrong={ gsx$quizwrong.$t } truthvalue="yes"></metro-quiz>
+        <metro-barchart quiz={ showQuiz.quiz1 } quizId="quiz1" scrollEvent={ opts.chartTrigger } title="Revenue" color="#FF3814" size="large-chart" series="revenue" suffix=" €"></metro-barchart>
       </figure>
       
       <figure if={ gsx$sujet.$t == 'étranger' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
+        <metro-quiz onanswerclick="{ this.showAnswer }" quizId="quiz2" headline={ gsx$quizheadline.$t } right={ gsx$quizright.$t } wrong={ gsx$quizwrong.$t }></metro-quiz>
+        <metro-barchart quiz={ showQuiz.quiz2 } quizId="quiz2" scrollEvent={ opts.chartTrigger } title="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
+        <metro-barchart quiz={ showQuiz.quiz2 } quizId="quiz2" scrollEvent={ opts.chartTrigger } title="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'santé' } class="chart-container">
@@ -54,8 +56,8 @@
       </figure>
 
       <figure if={ gsx$sujet.$t == 'age' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Jeunes" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Vieux" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Moins de 18 ans" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } title="Plus de 65 ans" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'restaurant' } class="chart-container">
@@ -101,16 +103,26 @@
     var breakpointMid = 520
 
     function drawBarChart (response) {
-        opts.chartTrigger.trigger('draw')
+      console.log(response)
+      opts.chartTrigger.trigger('draw')
     }
 
     var that = this
 
     that.sidebar_data = ''
+    that.showQuiz = {"quiz1": true, "quiz2": true}
+
+    that.showAnswer = (quizId) => {
+      that.showQuiz[quizId] = false
+      that.update({
+      })
+      opts.chartTrigger.trigger('draw', quizId)
+    }
 
     that.on('mount', () => {
-      console.log(opts)
       drawBackground()
+
+      // initialise scrollytelling
       scroller
         .setup({
           step: '.scrolly', // required - class name of trigger steps
@@ -118,13 +130,13 @@
           offset: 0.8
         })
     })
+
     scroller.onStepEnter(drawBarChart)
 
     function drawBackground () {
       var svg = select('#map_background')
       var svgWidth = select('#background_wrapper').node().getBoundingClientRect().width
       var svgHeight = Math.min(1200, window.innerHeight)
-
 
       // if (window.innerHeight < 850) svgHeight = 700
       if (window.innerHeight < 650) svgHeight = 600
@@ -453,12 +465,12 @@
 // Redraw based on the new size whenever the browser window is resized.
 function reDraw () {
   drawBackground()
-  drawBarChart()
+  opts.chartTrigger.trigger('redraw')
 }
 
 window.addEventListener('resize', reDraw)
 
-if (window.innerWidth < 768) window.removeEventListener('resize',reDraw)
+if (window.innerWidth < 768) window.removeEventListener('resize', reDraw)
 
 </script>
 </metro-app>

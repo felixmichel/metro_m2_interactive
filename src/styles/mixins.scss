@@ -14,6 +14,9 @@
   @else if $canvas == L {
     @media only screen and (max-width: $L) { @content; }
   }
+  @else if $canvas == XL {
+    @media only screen and (max-width: $XL) { @content; }
+  }
 }
 
 @mixin font-size($sizeValue: 1.6) {

@@ -9,16 +9,12 @@ import '../styles/index.scss'
 import './components/app.tag'
 import './components/barchart.tag'
 import './components/sidebar.tag'
+import './components/quiz.tag'
 import './components/raw.tag'
 import { csv, json } from 'd3-fetch'
 
 function TriggerChart () {
-  var self = this
-  self.triggered = false
-  riot.observable(self)
-  self.on('draw', function () {
-    self.triggered = true
-  })
+  riot.observable(this)
 }
 
 Promise.all([
