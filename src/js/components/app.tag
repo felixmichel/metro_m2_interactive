@@ -93,8 +93,6 @@
 
     // TODO: Ziate, Videos einbetten, Breakpoint-Tablet, Real-Data for Sidebar, Lazy-Video-Loading, Footer
 
-    // Nice to have: Barchart-Quiz, Scroll Fanciness, kleiner parallax Effekt, Charts in position fixed
-
     var primaryColor = '#FF3814'
     var backgroundColor = '#EDE6DE'
 

@@ -1,5 +1,4 @@
 <metro-barchart>
-  <!-- <h4 id="button">Click event</h4> -->
   <div class="wrapper { opts.size }">
     <svg id="{ opts.series }"></svg>
   </div>
@@ -219,14 +218,14 @@
       .attr("transform", "translate(" + chart_width + ", 3.5)")
     }
 
-    function animateChart(data) {
+    function animateChart() {
       bar_update.select("rect").transition()
           .duration(2000)
           .attr("y", function(d) {
             return y(d['random1']); })
           .attr("height", function(d) { 
-          return chart_height - y(d['random1']); 
-        })
+            return chart_height - y(d['random1']); 
+          })
           .on("end", function () { 
             select(this).transition().duration(2000)
               .attr("y", function(d) {
