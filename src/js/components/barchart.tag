@@ -10,7 +10,6 @@
   import { min, max } from "d3-array";
   import { axisBottom, axisLeft } from "d3-axis";
   import { transition } from 'd3-transition'
-  import { format } from 'd3-format'
 
   var primary_color = opts.color;
   var background_color = "#EDE6DE";
@@ -30,9 +29,22 @@
     })
   }
 
+  function formatNumber (number) {
+    var numstring = number.toString();
+    if(numstring.length > 3) {
+      var thpos = -3;
+      var strgnum = numstring.slice(0, numstring.length+thpos);
+      var strgspace = (" " + numstring.slice(thpos));
+      numstring = strgnum + strgspace;
+      return numstring
+    } else {
+      return number
+    }
+  }
+
   function drawChart () {
 
-  var margin = {top: 35, right: window.innerWidth < breakpoint_m ? 25 : 35, bottom: 175, left: 47}
+  var margin = {top: 35, right: window.innerWidth < breakpoint_m ? 25 : 35, bottom: 175, left: 50}
 
   var svg_height = opts.height ? opts.height : 500;
 
@@ -63,13 +75,11 @@
 		x.domain(data.map(function(d) { return d.station; }));
 		y.domain([0, opts.max_value ? opts.max_value : max_value]);
 
-    var formatting = format("d")
-
     var y_axis = g.append("g")
       .attr("class", "axis axis--y")
         .attr("fill", primary_color)
         .call(axisLeft(y).ticks(5)
-        .tickFormat(d => formatting(d) + opts.suffix))
+        .tickFormat(d => formatNumber(d) + opts.suffix))
     
     y_axis.append("g")
       .attr("class", "chart-title")
@@ -79,7 +89,7 @@
       .attr("x", 10)
       .attr("dy", "0.71em")
       .attr("text-anchor", "start")
-      .text(opts.title);
+      .text(opts.caption);
 
 		var x_axis = g.append("g")
 			.attr("class", "axis axis--x")
@@ -109,6 +119,7 @@
     });
 
     bar_update.select("rect")
+        .style("pointer-events", "none")
     		.attr("y", chart_height)
     		.attr("width", x.bandwidth())
         .attr("fill", primary_color)
@@ -119,10 +130,13 @@
     		.attr("height", function(d) { 
           return chart_height - y(d[series]); 
         })
+        .on("end", function () { 
+          select(this).style("pointer-events", "auto")
+        })
 
     bar_update.select(".bar-value")
       .transition()
-      .text(function(d) { return Math.round(d[series]) + opts.suffix; })
+      .text(function(d) { return formatNumber(Math.round(d[series])) + opts.suffix; })
       .style("text-anchor", "middle")
       .attr("x", x.bandwidth() / 2)
       .attr("y", function(d) {
@@ -130,14 +144,20 @@
         return y(d[series]) + offset; })
       .attr("opacity",  0);
 
-    bar_update.on("mouseenter", function(d, i) {
-     select(this).select(".bar-value")
-      .attr("opacity", "1");
+    bar_update.on("mouseenter", function (d) {
+      select(this).select("rect").transition().attr("opacity", ".8")
+      select(this).select(".bar-value")
+        .attr("opacity", "1");
+      select_axis_label(d).style("font-weight", 700);
+      select_axis_label(d).select(".outer-circle").transition().attr("fill", primary_color)
     })
 
-    bar_update.on("mouseleave", function(d, i) {
-     select(this).select(".bar-value")
-      .attr("opacity", "0");
+    bar_update.on("mouseleave", function (d) {
+      select(this).select("rect").transition().attr("opacity", "1")
+      select(this).select(".bar-value")
+        .attr("opacity", "0");
+      select_axis_label(d).style("font-weight", 400);
+      select_axis_label(d).select(".outer-circle").transition().attr("fill", background_color)
     })
 
     var ticks = x_axis.selectAll(".tick");
@@ -154,9 +174,11 @@
 
     ticks.each(function() { select(this)
   		.append("circle")
+      .attr("class", "outer-circle")
   		.attr("r", 3.5)
   		.attr("cy", 15)
   		.attr("fill", background_color) })
+
 
     x_axis.selectAll("text")
       .attr("class", "barchart-label")
@@ -210,12 +232,12 @@
         .text('?')
       metro_train.style('opacity', 0) } 
     else {
-      svg.style("opacity", 1).style("pointer-events", "auto");
       metro_train.transition()
       .style('opacity', 1)
       .delay(200)
       .duration(3000)
       .attr("transform", "translate(" + chart_width + ", 3.5)")
+      svg.style("opacity", 1).style("pointer-events", "auto");
     }
 
     function animateChart() {
@@ -237,6 +259,15 @@
               .on("end", function () { animateChart() })
             })
         }
+
+    function select_axis_label(datum) {
+      return x_axis.selectAll('.tick')
+      .filter(function(x) {
+        return x == datum.station });
+    }
+
+
+
 
   });
 }

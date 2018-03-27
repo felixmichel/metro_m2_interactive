@@ -52,12 +52,11 @@ header {
   position: absolute;
   top: 90vh;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 0;
   opacity: 0.8;
   animation: showIntro 1.5s ease-in 6s forwards;
   @include MQ(S) {
-    top: 98%; 
+    top: 24vh; 
     background-color: $background-color;
   }
 }
@@ -560,6 +559,11 @@ a {
 .wrong {
   display: none;
   opacity: 0;
+}
+
+tspan {
+  fill: $light-brown;
+  font-weight: 400;
 }
 
 

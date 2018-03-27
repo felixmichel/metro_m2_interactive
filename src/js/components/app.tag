@@ -35,41 +35,45 @@
 
       <figure if={ gsx$sujet.$t == 'revenue' } class="chart-container">
         <metro-quiz onanswerclick="{ this.showAnswer }" quizId="quiz1" headline={ gsx$quizheadline.$t } right={ gsx$quizright.$t } wrong={ gsx$quizwrong.$t } truthvalue="yes"></metro-quiz>
-        <metro-barchart quiz={ showQuiz.quiz1 } quizId="quiz1" scrollEvent={ opts.chartTrigger } title="Revenue" color="#FF3814" size="large-chart" series="revenue" suffix=" €"></metro-barchart>
+        <metro-barchart quiz={ showQuiz.quiz1 } quizId="quiz1" scrollEvent={ opts.chartTrigger } caption="Revenue" color="#FF3814" size="large-chart" series="revenue" suffix=" €"></metro-barchart>
       </figure>
       
       <figure if={ gsx$sujet.$t == 'étranger' } class="chart-container">
         <metro-quiz onanswerclick="{ this.showAnswer }" quizId="quiz2" headline={ gsx$quizheadline.$t } right={ gsx$quizright.$t } wrong={ gsx$quizwrong.$t }></metro-quiz>
-        <metro-barchart quiz={ showQuiz.quiz2 } quizId="quiz2" scrollEvent={ opts.chartTrigger } title="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
-        <metro-barchart quiz={ showQuiz.quiz2 } quizId="quiz2" scrollEvent={ opts.chartTrigger } title="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
+        <metro-barchart quiz={ showQuiz.quiz2 } quizId="quiz2" scrollEvent={ opts.chartTrigger } caption="Immigré" color="#FF3814" size="medium-chart" series="percent_immigration" max_value="35.91" suffix="%"></metro-barchart>
+        <metro-barchart quiz={ showQuiz.quiz2 } quizId="quiz2" scrollEvent={ opts.chartTrigger } caption="Étranger" color="#FF7960" size="medium-chart" series="percent_etranger" max_value="35.91" suffix="%"></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'santé' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Omnipraticien" color="#FF3814" size="large-chart" series="omnipraticien" suffix=""></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Omnipraticien" color="#FF3814" size="large-chart" series="omnipraticien" suffix=""></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'commerce' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Boulangerie" color="#FF3814" size="medium-chart" series="boulangerie" max_value="50" height="350" suffix=""></metro-barchart>
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Coiffeur" color="#FF7960" size="medium-chart" series="coiffeur"suffix="" height="350" max_value="50"></metro-barchart>
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Banque, caisse d'épargne" color="#CC2D10" size="medium-chart" series="banque" suffix="" height="350" max_value="50"></metro-barchart>
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Réparation voiture" color="#7F1C0A" size="medium-chart" series="voiture" max_value="50" height="350" suffix=""></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Boulangerie" color="#FF3814" size="medium-chart" series="boulangerie" max_value="50" height="350" suffix=""></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Coiffeur" color="#FF7960" size="medium-chart" series="coiffeur"suffix="" height="350" max_value="50"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Banque, caisse d'épargne" color="#CC2D10" size="medium-chart" series="banque" suffix="" height="350" max_value="50"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Réparation voiture" color="#7F1C0A" size="medium-chart" series="voiture" max_value="50" height="350" suffix=""></metro-barchart>
+      </figure>
+
+      <figure if={ gsx$sujet.$t == 'density' } class="chart-container">
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Densité de population (hab./km&#178;)" color="#FF3814" size="large-chart" series="population_density" suffix=""></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'age' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Moins de 18 ans" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Plus de 65 ans" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Moins de 18 ans" color="#FF3814" size="medium-chart" series="percent_under18" max_value="35.81" suffix="%"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Plus de 65 ans" color="#FF7960" size="medium-chart" series="percent_over65" max_value="35.81" suffix="%"></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'restaurant' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Restaurant" color="#FF3814" size="large-chart" series="restaurant"  suffix=""></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Restaurant" color="#FF3814" size="large-chart" series="restaurant"  suffix=""></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'chomage' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Chômage" color="#FF3814" size="large-chart" series="chomage"  suffix="%"></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Chômage" color="#FF3814" size="large-chart" series="chomage"  suffix="%"></metro-barchart>
       </figure>
 
       <figure if={ gsx$sujet.$t == 'airbnb' } class="chart-container">
-        <metro-barchart scrollEvent={ opts.chartTrigger } title="Airbnb" color="#FF3814" size="large-chart" series="airbnb"  suffix=""></metro-barchart>
+        <metro-barchart scrollEvent={ opts.chartTrigger } caption="Airbnb" color="#FF3814" size="large-chart" series="airbnb"  suffix=""></metro-barchart>
       </figure>
 
       <p if={ gsx$sujet.$t != 'introduction' }>
@@ -340,10 +344,10 @@
           .style('opacity', 1)
           .text(function (d) { return d.station })
 
-      stationsEnter.attr('pointer-events', 'none')
+      stationsEnter.style('pointer-events', 'none')
         .transition()
         .delay(6000)
-        .attr('pointer-events', '')
+        .style('pointer-events', 'auto')
 
       stationsEnter.on("mouseenter", function(d, i) {
         select(this).select('.inner-circle')
