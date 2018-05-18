@@ -46,6 +46,12 @@ header {
   padding-bottom: $vertical-padding;
 }
 
+.footer {
+  background-color: #E4DACE;
+  color: $background-color;
+  min-height: 20vh;
+}
+
 .scroll-indicator {
   z-index: 2;
   visibility: hidden;
@@ -494,9 +500,13 @@ a {
   padding-bottom: 5px;
   font-weight: 400;
   font-family: $title-font;
-  @include font-size(1.5);
+  @include font-size(1.6);
   display: block;
   color: $dark-brown;
+  @include MQ(S) {
+    @include font-size(1.5);
+  }
+
 }
 
 .stereotype {
@@ -564,6 +574,10 @@ a {
 tspan {
   fill: $light-brown;
   font-weight: 400;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 

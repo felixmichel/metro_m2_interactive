@@ -3,7 +3,7 @@
     <metro-sidebar class="sidebar" data="{ sidebar_data }"></metro-sidebar>
     <div class="intro-pageload">
       <div class="intro">
-        <h1>Les inégalités de Marseille</h1>
+        <h1>Les Marseillais de la ligne 2</h1>
         <h2>Les différences arrêt par arrêt</h2>
         <p class="author">Une enquête de <span>Nicolas Bocquet et Félix Michel</span></p>
         <div class="scroll-indicator mobile">
@@ -80,9 +80,11 @@
         <raw content="{ gsx$contenu.$t }"></raw>
       </p>
 
+      <p class="no-margin"><br><br></p>
+
     </main>
 
-    <footer class="container"></footer>
+    <footer class="container footer"></footer>
 
 
     <script type="text/javascript">

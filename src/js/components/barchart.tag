@@ -228,7 +228,7 @@
         .attr('text-anchor', 'middle')
         .style('dominant-baseline', 'alphabetical')
         .attr('x', chart_width / 2)
-        .attr('y', window.innerWidth < breakpoint_m ? chart_height - 5 : chart_height - 8 )
+        .attr('y', window.innerWidth < breakpoint_m ? chart_height - 3.1 : chart_height - 4.65)
         .text('?')
       metro_train.style('opacity', 0) } 
     else {
