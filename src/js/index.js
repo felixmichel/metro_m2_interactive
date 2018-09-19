@@ -30,12 +30,12 @@ Promise.all([
   json('data/content.json'),
   json('https://spreadsheets.google.com/feeds/list/15kW1TxJsPEeEyOK6NnVoDdJOqgD7yaeeH2yyCpaPyA0/od6/public/values?alt=json')
 ])
-.then(([stations, svg, content, parsedEntries]) => {
-  mount('metro-app', {
-    chartTrigger: new TriggerChart(),
-    stations: stations,
-    svg_data: svg,
-    content: content,
-    spreadsheet: parsedEntries.feed.entry
+  .then(([stations, svg, content, parsedEntries]) => {
+    mount('metro-app', {
+      chartTrigger: new TriggerChart(),
+      stations: stations,
+      svg_data: svg,
+      content: content,
+      spreadsheet: parsedEntries.feed.entry
+    })
   })
-})

@@ -43,8 +43,8 @@
     "sass-mq": "^3.3.1",
     "style-loader": "^0.13.1",
     "url-loader": "1.0.1",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "3.1.4"
+    "webpack": "1.13.1",
+    "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
     "core-js": "2.5.6",
